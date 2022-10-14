@@ -14,7 +14,11 @@ nlp = spacy.load('en_core_web_sm')
 
 
 def remove_html_tags(text):
-    # Put your code
+
+    pattern = re.compile('<.*?>') 
+
+    text = re.sub(pattern, '', text)
+
     return text
 
 
