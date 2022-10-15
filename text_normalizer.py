@@ -6,8 +6,9 @@ import unicodedata
 from bs4 import BeautifulSoup
 from contractions import CONTRACTION_MAP
 from nltk.tokenize.toktok import ToktokTokenizer
+from nltk.stem import PorterStemmer
 
-
+porter = PorterStemmer()
 tokenizer = ToktokTokenizer()
 stopword_list = nltk.corpus.stopwords.words('english')
 nlp = spacy.load('en_core_web_sm')
@@ -23,27 +24,49 @@ def remove_html_tags(text):
 
 
 def stem_text(text):
-    # Put your code
+
+    text = tokenizer.tokenize(text)
+
+    text = [porter.stem(token) for token in text]
+
     return text
 
 
 def lemmatize_text(text):
-    # Put your code
+
+    doc = nlp(text)
+
+    text = " ".join([token.lemma_ for token in doc])
+
+    text = tokenizer.tokenize(text)
+
     return text
 
 
 def expand_contractions(text, contraction_mapping=CONTRACTION_MAP):
-    # Put your code
+
+    text1 = text.split()
+
+    for i in text1:
+        if i in CONTRACTION_MAP.keys():
+            text = text.replace(i, contraction_mapping[i])
+
     return text
 
 
 def remove_accented_chars(text):
-    # Put your code
+
+    nfkd_form = unicodedata.normalize('NFKD', text)
+    text = u"".join([c for c in nfkd_form if not unicodedata.combining(c)])
+
     return text
 
 
 def remove_special_chars(text, remove_digits=False):
-    # Put your code
+    
+    
+
+
     return text
 
 
