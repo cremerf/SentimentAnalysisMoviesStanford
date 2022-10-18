@@ -29,6 +29,8 @@ def stem_text(text):
 
     text = [porter.stem(token) for token in text]
 
+    text = ' '.join(token for token in text)
+
     return text
 
 
@@ -36,20 +38,19 @@ def lemmatize_text(text):
 
     doc = nlp(text)
 
-    text = " ".join([token.lemma_ for token in doc])
+    text = ' '.join([token.lemma_ for token in doc])
 
-    text = tokenizer.tokenize(text)
+    text = text.replace(" ,",",")
+
+    text = text.replace(" .",".")
 
     return text
 
 
 def expand_contractions(text, contraction_mapping=CONTRACTION_MAP):
 
-    text1 = text.split()
-
-    for i in text1:
-        if i in CONTRACTION_MAP.keys():
-            text = text.replace(i, contraction_mapping[i])
+    for contractions, base in CONTRACTION_MAP.items():
+        text = text.replace(contractions, base)
 
     return text
 
@@ -62,16 +63,19 @@ def remove_accented_chars(text):
     return text
 
 
-def remove_special_chars(text, remove_digits=False):
-    
-    
+def remove_special_chars(text, remove_digits:bool=False):
 
+    if remove_digits:
+        text = re.sub("[^a-zA-Z ]", '', text)
+    else:
+        text = re.sub("[^a-zA-Z0-9 ]", '', text)
+    
 
     return text
 
 
 def remove_stopwords(text, is_lower_case=False, stopwords=stopword_list):
-    # Put your code
+    
     return text
 
 
