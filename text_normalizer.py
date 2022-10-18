@@ -74,19 +74,29 @@ def remove_special_chars(text, remove_digits:bool=False):
     return text
 
 
-def remove_stopwords(text, is_lower_case=False, stopwords=stopword_list):
+def remove_stopwords(text, is_lower_case=True, stopwords=stopword_list):
+
+    if is_lower_case:
+        text = text.lower()
+
+    word_list = tokenizer.tokenize(text)
+
+    clean_words = []
+    for w in word_list:
+        if w not in stopwords:
+            clean_words.append(w)  
     
-    return text
+    return ' '.join(clean_words)
 
 
 def remove_extra_new_lines(text):
-    # Put your code
-    return text
+
+     return re.sub('\n+', ' ', text)
 
 
 def remove_extra_whitespace(text):
-    # Put your code
-    return text
+    
+    return re.sub(' +', ' ', text)
     
 
 def normalize_corpus(
