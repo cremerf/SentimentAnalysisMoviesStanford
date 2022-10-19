@@ -169,3 +169,8 @@ def normalize_corpus(
         normalized_corpus.append(doc)
         
     return normalized_corpus
+
+stop_words = nltk.corpus.stopwords.words('english')
+
+def normalize_review(review: str) -> str:
+    return normalize_corpus([review], stop_words)[0]
