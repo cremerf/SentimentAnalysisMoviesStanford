@@ -6,15 +6,15 @@ from sklearn.preprocessing import label_binarize
 
 
 def get_performance(predictions, y_test, labels=[1, 0]):
-    # Put your code
-    accuracy = None  # replace
-    precision = None  # replace
-    recall = None  # replace
-    f1_score = None  # replace
+
+    accuracy = metrics.accuracy_score(y_true=y_test, y_pred=predictions)  
+    precision = metrics.precision_score(y_true=y_test, y_pred=predictions)
+    recall = metrics.recall_score(y_true=y_test, y_pred=predictions)
+    f1_score = metrics.f1_score(y_true=y_test, y_pred=predictions)
     
-    report = None  # replace
+    report = metrics.classification_report(y_true=y_test, y_pred=predictions, target_names=labels)
     
-    cm = None  # replace
+    cm = metrics.confusion_matrix(y_true=y_test, y_pred=predictions)  
     cm_as_dataframe = pd.DataFrame(data=cm)
     
     print('Model Performance metrics:')
