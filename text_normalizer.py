@@ -108,7 +108,7 @@ def normalize_corpus(
     text_stemming=False,
     text_lemmatization=False,
     special_char_removal=True,
-    remove_digits=True,
+    remove_digits=False,
     stopword_removal=True,
     stopwords=stopword_list
 ):
