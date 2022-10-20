@@ -1,3 +1,4 @@
+from cProfile import label
 import pandas as pd
 import matplotlib.pyplot as plt
 
@@ -12,9 +13,9 @@ def get_performance(predictions, y_test, labels=[1, 0]):
     recall = metrics.recall_score(y_true=y_test, y_pred=predictions)
     f1_score = metrics.f1_score(y_true=y_test, y_pred=predictions)
     
-    report = metrics.classification_report(y_true=y_test, y_pred=predictions, target_names=labels)
+    report = metrics.classification_report(y_true=y_test, y_pred=predictions, labels=labels)
     
-    cm = metrics.confusion_matrix(y_true=y_test, y_pred=predictions)  
+    cm = metrics.confusion_matrix(y_true=y_test, y_pred=predictions,labels=labels)  
     cm_as_dataframe = pd.DataFrame(data=cm)
     
     print('Model Performance metrics:')
