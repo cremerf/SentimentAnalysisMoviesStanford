@@ -106,7 +106,7 @@ def normalize_corpus(
     accented_char_removal=True,
     text_lower_case=True,
     text_stemming=False,
-    text_lemmatization=False,
+    text_lemmatization=True,
     special_char_removal=True,
     remove_digits=False,
     stopword_removal=True,
