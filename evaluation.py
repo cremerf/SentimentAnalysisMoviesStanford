@@ -1,8 +1,8 @@
 from cProfile import label
 import pandas as pd
 import matplotlib.pyplot as plt
-
 from sklearn import metrics
+from sklearn.metrics import roc_auc_score, roc_curve
 from sklearn.preprocessing import label_binarize
 
 
@@ -35,10 +35,10 @@ def get_performance(predictions, y_test, labels=[1, 0]):
 
 
 def plot_roc(model, y_test, features):
-    # Put your code
-    fpr = None  # replace
-    tpr = None  # replace
-    roc_auc = None  # replace
+    
+    pred_proba = model.predict_proba(features)[:, 1]
+    fpr, tpr, Thresholds = roc_curve(y_test, pred_proba)
+    roc_auc = roc_auc_score(y_test,pred_proba)
 
     plt.figure(figsize=(10, 5))
     plt.plot(fpr, tpr, label=f'ROC curve (area = {roc_auc})', linewidth=2.5)
